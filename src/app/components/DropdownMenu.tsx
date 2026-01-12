@@ -20,7 +20,11 @@ export default function DropdownMenu(){
     { label: 'Sair', href: '/pages/login' },
   ];
   
-
+    const [mounted, setMounted] = useState(false);
+  
+    useEffect(() => {
+      setMounted(true);
+    }, []);
 
   // Fecha o dropdown ao clicar fora dele
   useEffect(() => {

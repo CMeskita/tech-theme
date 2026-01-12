@@ -10,10 +10,9 @@ import NavigationGrid from "@/app/components/NavigationGrid";
 
 
 export default function Panel() {
-  return (
+      // 2. Estado para verificar se já montou no cliente
 
-
-  
+  return (  
         <Behind classname={""}>
         
         
@@ -31,7 +30,7 @@ export default function Panel() {
 
                         </div>
                             <div className="shadow-lg p-6 rounded-lg bg-white">
-                                <ChartLine/>
+                           <ChartLine/>
                             </div>
                     </div>
         </div>

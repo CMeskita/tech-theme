@@ -1,3 +1,4 @@
+'use client'
 import ContainerLogin from "./ContainerLogin";
 
 export default function Logo() {
