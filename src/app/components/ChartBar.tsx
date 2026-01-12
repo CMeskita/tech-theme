@@ -1,4 +1,5 @@
-import React from "react";
+
+'use client'
 import { TEChart } from "tw-elements-react";
 
 export default function ChartBar() {

@@ -1,5 +1,3 @@
-import SideBar from "./SideBar";
-
 
 interface IContainer{
   children: any;

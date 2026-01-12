@@ -2,13 +2,6 @@
 import { Info,Settings} from 'lucide-react';
 import DropdownMenu from './DropdownMenu';
 import { useRouter } from 'next/navigation';
-
-interface IHeaderCalendar
- {
-  UserAcesso: string;
-  AppName?: string;
-
-}
  
 
 export default function Header(){
