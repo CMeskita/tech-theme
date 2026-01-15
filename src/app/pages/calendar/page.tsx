@@ -27,13 +27,15 @@ const appUser = process.env.NEXT_PUBLIC_APP_USER || "Tech Theme";
       <>
         
           <Behind classname={""}>
-              
+            <div className="h-full overflow-y-auto">
             <Container>
-      
+        
           <div className=" max-w-screen-lg mx-auto min-h-screen flex flex-col">
                {/* Header Compacto para Mobile */}
-               
-            <div className="border border-gray-200">
+             
+          <div className="border border-gray-200">
+             
+            
             <div className="w-full max-w-7xl mx-auto px-2 lg:px-8 xl:px-14">
               <CalendarDayDynamic/>
             </div>
@@ -51,15 +53,15 @@ const appUser = process.env.NEXT_PUBLIC_APP_USER || "Tech Theme";
                 </div>
               </div>
             </div>
-            </div>
-                    <Footer onClick={clicando}/>
           </div>
-         
+          <Footer onClick={clicando}/>
+            </div>
+
        </Container>
      
-  
+    </div>   
     
-                   </Behind>                         
+ </Behind>                         
 
 </>
   );

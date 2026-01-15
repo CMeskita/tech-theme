@@ -64,7 +64,7 @@ export default function CalendarDayDynamic({ currentMonth = new Date() }){
                </button>
           
               <button onClick={() => setCurrentDate(new Date())} className="hidden md:flex py-2 pl-1.5 pr-3 rounded-md bg-gray-50 border border-gray-300 items-center gap-1.5 text-xs font-medium text-gray-900 transition-all duration-500 hover:bg-gray-100">
-               <CalendarDays className="opacity-50" />Today
+               <CalendarDays className="opacity-50" />Hoje
               </button>
 
               <button   onClick={nextMonth} className="text-gray-500 rounded transition-all duration-300 hover:bg-gray-100 hover:text-gray-900">
@@ -107,7 +107,7 @@ export default function CalendarDayDynamic({ currentMonth = new Date() }){
                 className={`
                 text-[10px] sm:text-xs font-semibold flex items-center justify-center 
                 w-5 h-5 sm:w-7 sm:h-7 rounded-full
-                ${isSelectedDay ? 'bg-indigo-600 text-white' : 'text-gray-900'}
+                ${isSelectedDay ? 'bg-primary text-white' : 'text-gray-900'}
               `}
               >
                 {format(day, 'd')}
@@ -115,7 +115,7 @@ export default function CalendarDayDynamic({ currentMonth = new Date() }){
 
               {event && (
                 <div className="mt-2">
-                  <span className="hidden lg:block text-[10px] leading-tight font-medium text-indigo-700 bg-indigo-50 p-1 rounded border border-indigo-100 truncate">
+                  <span className="hidden lg:block text-[10px] leading-tight font-medium text-gray-900 bg-primary/10 p-1 rounded border border-indigo-100 truncate">
                     {event}
                   </span>
                   <span className="lg:hidden block w-1.5 h-1.5 rounded-full bg-indigo-500 mx-auto"></span>

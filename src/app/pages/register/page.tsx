@@ -26,7 +26,7 @@ export default function User() {
                   <div className="bg-primary/50 rounded-lg p-4 sticky top-0 z-10 shadow-sm  ">
                     <div className="flex justify-between items-center">
                       <div>
-                        <h1 className="text-lg font-bold text-gray-900">Cadastro</h1>
+                        <h1 className="text-lg font-bold text-gray-900">Cadastros </h1>
                         
                       </div>
                   

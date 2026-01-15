@@ -16,11 +16,11 @@ export default function Panel() {
         <Behind classname={""}>
           <div className="flex  flex-col justify-center px-6 py-12 lg:px-8 h-screen">
            <div className="h-full overflow-y-auto">
-         
+             <Header/>
+                    <Logo/>
 
                  <Container>
-                     <Header/>
-                    <Logo/>
+                 
                  
                     <NavigationGrid/>
 
