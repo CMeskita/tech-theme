@@ -53,7 +53,7 @@ export default function CalendarDayDynamic({ currentMonth = new Date() }){
     return(
 <div className="w-full max-w-4xl mx-auto p-4">
       {/* Cabeçalho de Navegação */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-2 bg-white p-2 rounded-lg shadow-sm">
         <h2 className="text-xl font-bold text-gray-900 capitalize">
           {format(currentDate, 'MMMM yyyy', { locale: ptBR })}
         </h2>
@@ -75,9 +75,9 @@ export default function CalendarDayDynamic({ currentMonth = new Date() }){
       </div>
 
       {/* Grid de Dias da Semana (Dom, Seg...) */}
-      <div className="grid grid-cols-7 mb-2">
+      <div className="grid grid-cols-7 bg-primary/50 p-1 rounded-t-lg">
         {['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'].map(day => (
-          <div key={day} className="text-center text-sm font-semibold text-gray-500 pb-2">
+          <div key={day} className="text-center text-sm font-semibold text-gray-900 pb-2">
             {day}
           </div>
         ))}
@@ -99,7 +99,7 @@ export default function CalendarDayDynamic({ currentMonth = new Date() }){
               className={`
               p-1 sm:p-3 flex flex-col justify-between transition-all duration-300 cursor-pointer
               min-h-[50px] sm:min-h-[80px] lg:h-28 border-b border-r border-gray-200 
-              ${isCurrentMonth ? 'bg-white' : 'bg-gray-50'}
+              ${isCurrentMonth ? 'bg-white' : 'bg-primary/10 text-gray-400'}
               ${isLastInRow ? 'border-r-0' : ''}
               `}
             >

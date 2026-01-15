@@ -14,16 +14,17 @@ export default function Panel() {
 
   return (  
         <Behind classname={""}>
-        
-        
-                 <Container>
-                    <div className="h-full overflow-y-auto">
-                          <Header/>
-                    <Logo/>
+          <div className="flex  flex-col justify-center px-6 py-12 lg:px-8 h-screen">
+           <div className="h-full overflow-y-auto">
+         
 
+                 <Container>
+                     <Header/>
+                    <Logo/>
+                 
                     <NavigationGrid/>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-4 mt-8 ">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-4 mt-8 mb-4 ">
                       <div className="shadow-lg p-6 rounded-lg bg-white">
                           <ChartBar/>
                           
@@ -33,9 +34,10 @@ export default function Panel() {
                            <ChartLine/>
                             </div>
                     </div>
-        </div>
+        
               </Container>
-         
+              </div>
+         </div>
         </Behind>
 
   );

@@ -17,7 +17,7 @@ export default function Header(){
 
 
 return(
-    <div className="flex  items-center justify-between shadow-lg p-1 rounded-lg bg-white gap-3">
+    <div className="flex  items-center justify-between shadow-lg p-1 bg-primary/50 rounded-lg gap-3">
           <div className="flex items-center gap-px p-1 rounded-md ">
       
                 <button onClick={BackHome} className="py-1 px-5 rounded-lg  text-sm font-medium text-gray-900 transition-all duration-300 hover:bg-white">

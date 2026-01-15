@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { useRouter } from "next/navigation";
 import Footer from "@/app/components/Footer";
+import Behind from "@/app/components/Behind";
 
 interface Appointment {
   id: number;
@@ -19,10 +20,11 @@ interface Appointment {
 
 export default function Panel() {
     const router = useRouter()  
-        function clicando() {
-          alert('Login Realizado com Sucesso!!');
-          router.push('/pages/panel');
-        }
+    function clicando(acao: "agenda" | "clientes" | "painel") {
+  if (acao === "agenda")   router.push('/pages/calendar');
+  if (acao === "clientes") router.push('/pages/register');
+  if (acao === "painel") router.push('/pages/panel');
+}
   
   
   const [today] = useState(new Date());
@@ -41,17 +43,18 @@ export default function Panel() {
     cancelled: "bg-red-100 text-red-700 border-red-200",
   };
   return (
-    <>
+    <Behind classname={""}>
+      
     <Container>
 
-    <div className=" max-w-screen-lg mx-auto min-h-screen bg-gray-50 flex flex-col">
+    <div className=" max-w-screen-lg mx-auto min-h-screen flex flex-col">
       {/* Header Compacto para Mobile */}
-      <div className="bg-white p-4  sticky top-0 z-10 shadow-sm">
+      <div className="bg-primary/50 p-4  sticky top-0 z-10 shadow-sm rounded-lg">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-lg font-bold text-gray-900">Hoje</h1>
-            <p className="text-xs text-gray-500 capitalize">
-              {format(today, "EEEE, dd 'de' MMM", { locale: ptBR })}
+            <h1 className="text-lg font-bold text-gray-900">Agenda de Hoje</h1>
+            <p className="text-xs text-gray-900 capitalize">
+              {format(today, "EEEE, dd 'de' MMMM", { locale: ptBR })}
             </p>
           </div>
       
@@ -91,7 +94,8 @@ export default function Panel() {
         <Footer onClick={clicando}/>
     </div>
     </Container>
-    </>
+    </Behind>
+    
   );
 };
 

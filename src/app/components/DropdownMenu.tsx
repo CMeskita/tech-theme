@@ -42,8 +42,8 @@ export default function DropdownMenu(){
       {/* Botão de Trigger */}
     
         <button onClick={() => setIsOpen(!isOpen)} type="button" data-target="dropdown-default" className="p-3 text-gray-500 flex items-center justify-center transition-all duration-300 hover:text-gray-900">
-                <TextAlignJustify />
-                <ChevronDown />
+                <TextAlignJustify className='text-gray-900' />
+                <ChevronDown className='text-gray-900' />
         </button>
 
       {/* Menu Dropdown */}

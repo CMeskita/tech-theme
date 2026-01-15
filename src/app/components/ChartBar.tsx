@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { TEChart } from "tw-elements-react";
 
 export default function ChartBar() {
+  
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -14,7 +15,7 @@ export default function ChartBar() {
   if (!isClient) return null;
 
   return (
-    <div className="w-full">
+    <div className="w-full h-[300px]">
       <TEChart
         type="bar"
         data={{

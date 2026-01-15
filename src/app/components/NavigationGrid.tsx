@@ -11,6 +11,8 @@ interface NavCard {
   icon: LucideIcon;
 }
 export default function NavigationGrid(){
+ const cardStyle = "flex  flex-row justify-lefth  p-2 rounded-lg bg-white gap-2 ";
+
  const cards: NavCard[] = [
     { label: 'Valor Mês', valor: '3000,00', icon: DollarSign  },
     { label: 'Valor Senanal', valor: '1500', icon: DollarSign },
@@ -24,18 +26,13 @@ export default function NavigationGrid(){
         const Icon = card.icon;
         
         return (
-          <button
-            key={card.valor}
-           
-            className="group flex flex-col items-center justify-center p-6 rounded-2xl bg-white shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-xl hover:shadow-gray-100 hover:border-primary hover:bg-gray-50 active:scale-95"
-          >
+          <button key={card.valor} className="group flex flex-col items-center justify-center p-2 rounded-lg bg-white shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-xl hover:shadow-gray-100 hover:border-primary hover:bg-gray-50 active:scale-95">
             {/* Container do Ícone */}
-            <div className="mb-3 p-3 rounded-x">
-              <Icon size={28} strokeWidth={2}  className='text-primary'/>
-                     <span className="text-5xl font-bold text-gray-700 group-hover:text-primary transition-colors">
-            
-              {card.valor}
-            </span>
+            <div className={cardStyle+"mb-3 p-3 rounded-lg"}>
+               <Icon size={28} strokeWidth={2}  className='text-primary'/>
+               <span className="text-3xl font-bold text-gray-700 group-hover:text-primary transition-colors">
+                  {card.valor}
+               </span>
             </div>
 
             {/* Texto do Card */}

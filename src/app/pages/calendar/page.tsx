@@ -1,4 +1,5 @@
 'use client'
+import Behind from "@/app/components/Behind";
 import CalendarDayDynamic from "@/app/components/CalendarDayDynamic";
 import Container from "@/app/components/Container";
 import Footer from "@/app/components/Footer";
@@ -6,11 +7,13 @@ import { Clock8 } from 'lucide-react';
 import { useRouter } from "next/navigation";
 
 export default function Calendar() {
-      const router = useRouter()  
-          function clicando() {
-            alert('Login Realizado com Sucesso!!');
-            router.push('/pages/panel');
-          }
+  const router = useRouter()  
+
+  function clicando(acao: "agenda" | "clientes" | "painel") {
+  if (acao === "agenda")   router.push('/pages/calendar');
+  if (acao === "clientes") router.push('/pages/register');
+  if (acao === "painel") router.push('/pages/panel');
+}
 const dataAtual = new Date();
 
 // Opção A: Nome completo do mês (ex: "janeiro")
@@ -22,10 +25,14 @@ const appUser = process.env.NEXT_PUBLIC_APP_USER || "Tech Theme";
 
   return (
       <>
-        <Container> 
         
+          <Behind classname={""}>
+              
+            <Container>
       
-     <div className="p-4">
+          <div className=" max-w-screen-lg mx-auto min-h-screen flex flex-col">
+               {/* Header Compacto para Mobile */}
+               
             <div className="border border-gray-200">
             <div className="w-full max-w-7xl mx-auto px-2 lg:px-8 xl:px-14">
               <CalendarDayDynamic/>
@@ -45,10 +52,14 @@ const appUser = process.env.NEXT_PUBLIC_APP_USER || "Tech Theme";
               </div>
             </div>
             </div>
-            </div>
-            <Footer onClick={clicando}/>
+                    <Footer onClick={clicando}/>
+          </div>
+         
        </Container>
-                                            
+     
+  
+    
+                   </Behind>                         
 
 </>
   );
