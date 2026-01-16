@@ -1,12 +1,23 @@
 import { LayoutDashboard,Home, UsersRound, CalendarDays   } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 interface IFooter {
 
-onClick?: (acao: "agenda" | "clientes" | "painel") => void;
+onClick?: (acao: "agenda" | "parceiros" | "painel") => void;
 }
 
 export default function Footer({onClick}:IFooter){
     
+const router = useRouter();
 
+  function lidarComClique(acao: "agenda" | "parceiros" | "painel") {
+    // 1. Executa a função passada via props (se existir)
+    onClick?.(acao);
+
+    // 2. Executa a navegação
+    if (acao === "agenda")   router.push('/pages/calendar');
+    if (acao === "parceiros") router.push('/pages/partner/calendar');
+    if (acao === "painel")   router.push('/pages/panel');
+  }
 
     const buttonStyle = "group flex flex-col items-center justify-center py-2 px-4 rounded-2xl transition-all duration-300 hover:bg-gray-100 active:scale-90 flex-1";
     return (
@@ -17,7 +28,7 @@ export default function Footer({onClick}:IFooter){
   
             {/* Item: Agenda (Ativo) */}
             <button 
-            onClick={() => onClick?.("agenda")}
+           onClick={() => lidarComClique("agenda")}
             className={buttonStyle}>
                 <div className="text-primary transition-transform duration-300 group-hover:-translate-y-1">
                 {/* Ícone (SVG ou Emoji) */}
@@ -28,17 +39,17 @@ export default function Footer({onClick}:IFooter){
 
             {/* Item: Clientes */}
             <button 
-            onClick={() => onClick?.("clientes")}
+             onClick={() => lidarComClique("parceiros")}
             className={buttonStyle}>
                 <div className="text-gray-400 transition-transform duration-300 group-hover:-translate-y-1 group-hover:text-gray-600">
                 <span className="text-xl">  <UsersRound /></span>
                 </div>
-                <span className="text-[10px] font-bold text-gray-400 group-hover:text-gray-600 tracking-wide">Clientes</span>
+                <span className="text-[10px] font-bold text-gray-400 group-hover:text-gray-600 tracking-wide">Parceiros</span>
             </button>
 
             {/* Item: Home */}
             <button 
-                onClick={() => onClick?.("painel")}
+               onClick={() => lidarComClique("painel")}
                 className={buttonStyle}
             >
                 <div className="text-gray-400 transition-transform duration-300 group-hover:-translate-y-1 group-hover:text-gray-600">

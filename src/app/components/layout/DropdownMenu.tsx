@@ -13,18 +13,20 @@ export default function DropdownMenu(){
 
   const menuItems: MenuItem[] = [
     { label: 'Agendamento', href: '/pages/calendar' },
-    { label: 'Home', href: '/pages/home' },
     { label: 'Cadastro', href: '/pages/register' },
+    { label: 'Home', href: '/pages/home' },
     { label: 'Painel', href: '/pages/panel' },
+    { label: 'Parceiros', href: '/pages/partner/calendar' },
     { label: '', href: '', divider: true }, // Divisor
     { label: 'Sair', href: '/pages/login' },
+     /* { label: 'teste', href: '/pages/partner/' }*/
   ];
-  
+
     const [mounted, setMounted] = useState(false);
   
     useEffect(() => {
       setMounted(true);
-    }, []);
+    }, []); 
 
   // Fecha o dropdown ao clicar fora dele
   useEffect(() => {
@@ -52,7 +54,7 @@ export default function DropdownMenu(){
           <ul className="py-2">
             {menuItems.map((item, index) => (
               item.divider ? (
-                <li key={`sep-${index}`} className="bg-gray-100 w-full h-px my-1" />
+                <li key={`sep-${index}`} className="bg-gray-200 w-full h-px my-1" />
               ) : (
                 <li key={item.label}>
                   <a

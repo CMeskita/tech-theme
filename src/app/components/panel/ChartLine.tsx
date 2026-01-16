@@ -3,13 +3,19 @@ import React, { useEffect, useState } from "react";
 import { TEChart } from "tw-elements-react";
 
 export default function ChartLine() {
-  const [mounted, setMounted] = useState(false);
 
-  // useEffect garante que o código dentro dele só rode no cliente (navegador)
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+const [mounted, setMounted] = useState(false);
 
+const [corPrimaria, setCorPrimaria] = useState("#000");
+
+useEffect(() => {
+  const estilo = getComputedStyle(document.documentElement);
+  const cor = estilo.getPropertyValue('--color-primary').trim();
+  if (cor) setCorPrimaria(cor);
+   setMounted(true);
+}, []);
+
+ 
   // Enquanto o componente não "montar" no cliente, exibimos um estado de carregamento
   if (!mounted) {
     return (
@@ -28,10 +34,10 @@ export default function ChartLine() {
           datasets: [
             {
               label: "Agendamento por Dia",
-              data: [2112, 2343, 2545, 3423, 2365, 1985, 987],
-              borderColor: "#9B7B14",
-              pointBackgroundColor: "#9B7B14",
-              backgroundColor: "rgba(155, 123, 20, 0.2)", // Cor de fundo leve para o preenchimento
+              data: [20, 30, 35, 31, 23,40, 50],
+              borderColor: corPrimaria,
+              pointBackgroundColor: corPrimaria,
+              backgroundColor: `${corPrimaria}33`, // Cor de fundo leve para o preenchimento
               fill: true, // "true" cria um visual de gráfico de área mais moderno
               tension: 0.4, // Suaviza as curvas da linha
             },

@@ -4,15 +4,28 @@ import React, { useEffect, useState } from "react";
 import { TEChart } from "tw-elements-react";
 
 export default function ChartBar() {
-  
-  const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+
+const [isClient, setIsClient] = useState(false);
+
+const [corPrimaria, setCorPrimaria] = useState("#000");
+
+useEffect(() => {
+  const estilo = getComputedStyle(document.documentElement);
+  const cor = estilo.getPropertyValue('--color-primary').trim();
+  if (cor) setCorPrimaria(cor);
+   setIsClient(true);
+}, []);
 
   // Se não estiver no cliente, não renderiza o TEChart para evitar erro de hidratação
-  if (!isClient) return null;
+
+    if (!isClient) {
+    return (
+      <div className="w-full h-[300px] flex items-center justify-center bg-gray-50 animate-pulse rounded-xl">
+        <span className="text-gray-400 font-medium">Carregando gráfico...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full h-[300px]">

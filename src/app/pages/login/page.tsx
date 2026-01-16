@@ -1,15 +1,15 @@
 'use client';
-import Behind from "@/app/components/Behind";
+import Behind from "@/app/components/layout/Behind";
 import Buttom from "@/app/components/Buttom";
-import Container from "@/app/components/Container";
-import ContainerLogin from "@/app/components/ContainerLogin";
-import Input from "@/app/components/InputTh";
+import Container from "@/app/components/layout/Container";
+import ContainerLogin from "@/app/components/layout/ContainerLogin";
+import Input from "@/app/components/Input";
 import Label from "@/app/components/Label";
 import { useRouter } from "next/navigation";
 
 
 export default function Login() {
-  debugger;  
+ // debugger;  
       const router = useRouter()  
 
       function clicando() {
@@ -23,14 +23,13 @@ export default function Login() {
 
 <Behind classname={"p-10"} >
     <div className="h-full bg-gray-900">
-
         <Container>
-            <div className="flex  flex-col justify-center px-6 py-12 lg:px-8 h-screen">
+            <div className="flex  flex-col justify-center px-6 py-12 lg:px-8 h-screen ">
           
                 <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">Bem vindo!! </h2>
                 <h2 className="mt-10 text-center text-3xl font-bold tracking-tight text-white">{appName}</h2>
                 <ContainerLogin>
-                    <form  action="#" method="POST" className="space-y-6">
+                    <form  action="#" method="POST" className="space-y-6 p-2">
 
                         <div>
                             <Label type={"email"}>Email</Label>
@@ -67,7 +66,7 @@ export default function Login() {
             </div>
         </Container>
     </div>
- </Behind>
+</Behind>
 
     
   );

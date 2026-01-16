@@ -10,12 +10,12 @@ interface NavCard {
   valor: string;
   icon: LucideIcon;
 }
-export default function NavigationGrid(){
+export default function GridPanel(){
  const cardStyle = "flex  flex-row justify-lefth  p-2 rounded-lg bg-white gap-2 ";
 
  const cards: NavCard[] = [
     { label: 'Valor Mês', valor: '3000,00', icon: DollarSign  },
-    { label: 'Valor Senanal', valor: '1500', icon: DollarSign },
+    { label: 'Valor Semanal', valor: '1500', icon: DollarSign },
     { label: 'Agendamento Pedente ', valor: '20', icon: ClockAlert  },
     { label: 'Agendamento Confirmado ', valor: '10', icon: CalendarCheck2  },
   ];

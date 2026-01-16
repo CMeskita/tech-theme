@@ -1,6 +1,6 @@
 'use client';
 
-import Behind from "@/app/components/Behind";
+import Behind from "@/app/components/layout/Behind";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 

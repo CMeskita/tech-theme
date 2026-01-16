@@ -11,68 +11,78 @@ import {
   eachDayOfInterval, 
   isSameMonth, 
   isToday, 
-  startOfDay
+  
 } from 'date-fns';
 import { ptBR } from 'date-fns/locale'; // Para nomes de meses em português
-import { CalendarDays, ChevronLeft, ChevronRight } from 'lucide-react';
+import { CalendarDays, ChevronLeft, ChevronRight,Clock } from 'lucide-react';
+import { HORARIOS_MOCK, PARCEIROS_MOCK } from './Modal/DadosMockados';
+import AgendamentoModal from './Modal/AgendamentoModal';
 
 
 export default function CalendarDayDynamic({ currentMonth = new Date() }){
     
-  const [currentDate, setCurrentDate] = useState(new Date());
-     // Gerar array de 24 horas (0 a 23)
-  const hours = Array.from({ length: 24 }, (_, i) => i); 
+        const [currentDate, setCurrentDate] = useState(new Date());
 
+        // Gerar array de 24 horas (0 a 23)
+         const hours = Array.from({ length: 24 }, (_, i) => i); 
 
-// Lógica para gerar os dias do grid
-  const monthStart = startOfMonth(currentDate);
-  const monthEnd = endOfMonth(monthStart);
-  const startDate = startOfWeek(monthStart);
-  const endDate = endOfWeek(monthEnd);
-  const calendarDays = eachDayOfInterval({ start: startDate, end: endDate });
-  const days = eachDayOfInterval({ start: startDate, end: endDate });
+        // Lógica para gerar os dias do grid
+        const monthStart = startOfMonth(currentDate);
+        const monthEnd = endOfMonth(monthStart);
+        const startDate = startOfWeek(monthStart);
+        const endDate = endOfWeek(monthEnd);
+        const calendarDays = eachDayOfInterval({ start: startDate, end: endDate });
+       
 
-  // Handlers para os botões
-  const nextMonth = () => setCurrentDate(addMonths(currentDate, 1));
-  const prevMonth = () => setCurrentDate(subMonths(currentDate, 1));
+        // Handlers para os botões
+        const nextMonth = () => setCurrentDate(addMonths(currentDate, 1));
+        const prevMonth = () => setCurrentDate(subMonths(currentDate, 1));
 
-  // Exemplo de dados de eventos (num app real viria de uma API)
-  const events: Record<string, string> = {
-    [format(new Date(), 'yyyy-MM-dd')]: "Hoje é o dia!",
-    "2026-01-15": "Lançamento do Projeto",
-  };
+        // Exemplo de dados de eventos (num app real viria de uma API)
+        const events: Record<string, string> = {
+          [format(new Date(), 'yyyy-MM-dd')]: "Hoje é o dia!",
+          "2026-01-15": "Lançamento do Projeto",
+        };
       // Estados para o Modal
-        const [isModalOpen, setIsModalOpen] = useState(false);
-        const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+      const [isModalOpen, setIsModalOpen] = useState(false);
+      const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+      const [parceiroSelecionado, setParceiroSelecionado] = useState<number | null>(null);
+      const [horarioSelecionado, setHorarioSelecionado] = useState<string | null>(null);
 
         const handleOpenModal = (day: Date) => {
           setSelectedDate(day);
           setIsModalOpen(true);
         };
 
+
+
     return(
 <div className="w-full max-w-4xl mx-auto p-4">
       {/* Cabeçalho de Navegação */}
-      <div className="flex items-center justify-between mb-2 bg-white p-2 rounded-lg shadow-sm">
-        <h2 className="text-xl font-bold text-gray-900 capitalize">
-          {format(currentDate, 'MMMM yyyy', { locale: ptBR })}
-        </h2>
-        <div className="flex gap-2">
-         
-              <button  onClick={prevMonth} className="text-gray-500 rounded transition-all duration-300 hover:bg-gray-100 hover:text-gray-900">
-                 <ChevronLeft />
-               </button>
+        <div className="flex items-center justify-between mb-2 bg-white p-2 rounded-lg shadow-sm p-4">
+          <h2 className="text-xl font-bold text-gray-900 capitalize">
+            {format(currentDate, 'MMMM yyyy', { locale: ptBR })}
+             <p className="text-xs text-gray-500 capitalize"> 
+              {format(new Date(), "EEEE, dd 'de' MMMM", { locale: ptBR })}
+            </p>
+          </h2>
+          <div className="flex gap-2">
           
-              <button onClick={() => setCurrentDate(new Date())} className="hidden md:flex py-2 pl-1.5 pr-3 rounded-md bg-gray-50 border border-gray-300 items-center gap-1.5 text-xs font-medium text-gray-900 transition-all duration-500 hover:bg-gray-100">
-               <CalendarDays className="opacity-50" />Hoje
-              </button>
+                <button  onClick={prevMonth} className="text-gray-500 rounded transition-all duration-300 hover:bg-gray-100 hover:text-gray-900">
+                  <ChevronLeft />
+                </button>
+            
+                <button onClick={() => setCurrentDate(new Date())} className="hidden md:flex py-2 pl-1.5 pr-3 rounded-md bg-gray-50 border border-gray-300 items-center gap-1.5 text-xs font-medium text-gray-900 transition-all duration-500 hover:bg-gray-100">
+                <CalendarDays className="opacity-50" />Hoje
+                </button>
 
-              <button   onClick={nextMonth} className="text-gray-500 rounded transition-all duration-300 hover:bg-gray-100 hover:text-gray-900">
-                <ChevronRight />
-              </button>
+                <button   onClick={nextMonth} className="text-gray-500 rounded transition-all duration-300 hover:bg-gray-100 hover:text-gray-900">
+                  <ChevronRight />
+                </button>
 
+          </div>
         </div>
-      </div>
 
       {/* Grid de Dias da Semana (Dom, Seg...) */}
       <div className="grid grid-cols-7 bg-primary/50 p-1 rounded-t-lg">
@@ -125,48 +135,31 @@ export default function CalendarDayDynamic({ currentMonth = new Date() }){
           );
         })}
       </div>
-      {/* --- MODAL DE AGENDAMENTO --- */}
-      {isModalOpen && selectedDate && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-bold text-gray-900">Novo Agendamento</h3>
-                <button onClick={() => setIsModalOpen(false)} className="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
-              </div>
-              
-              <p className="text-sm text-gray-500 mb-6">
-                Agendando para: <span className="font-semibold text-indigo-600">
-                  {format(selectedDate, "dd 'de' MMMM", { locale: ptBR })}
-                </span>
-              </p>
+      {/* Modal*/}
+        <AgendamentoModal
+            isOpen={isModalOpen}
+            selectedDate={selectedDate}
+            parceiro={PARCEIROS_MOCK}
+            horarios={HORARIOS_MOCK}
+            parceiroSelecionado={parceiroSelecionado}
+            setParceirosSelecionado={setParceiroSelecionado}
+            horarioSelecionado={horarioSelecionado}
+            setHorarioSelecionado={setHorarioSelecionado}
+            onClose={() => {
+              setIsModalOpen(false);
+              setParceiroSelecionado(null);
+              setHorarioSelecionado(null);
+            }}
+            onSubmit={() => {
+              console.log({
+                data: selectedDate,
+                parceiroId: parceiroSelecionado,
+                horario: horarioSelecionado,
+              });
+              setIsModalOpen(false);
+            }}
+          />
 
-              <form className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Título do Evento</label>
-                  <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2.5 border" placeholder="Ex: Consulta Médica" />
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">Hora Início</label>
-                    <input type="time" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2.5 border" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">Hora Fim</label>
-                    <input type="time" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2.5 border" />
-                  </div>
-                </div>
-
-                <div className="flex gap-3 mt-6">
-                  <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition">Cancelar</button>
-                  <button type="submit" className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition">Salvar</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
 
     );

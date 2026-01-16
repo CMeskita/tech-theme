@@ -6,14 +6,12 @@ interface IContainer{
 
 export default function Container({ children, className = "" }: IContainer) {
   return (
-
-      <section className="relative z-10 p-5  py-8 sm:p-8 h-screen">
-   
+ 
+      <div className={`relative z-10 p-5  py-8 sm:p-8 min-h-screen  ${className}`} >
+        {/* relative z-10 p-5 py-8 sm:p-8 min-h-screen */}
         {children}
-  
-          
-      </section>
-    
+
+    </div>
   
   );
 

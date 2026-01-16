@@ -1,11 +1,11 @@
 'use client'
-import Container from "@/app/components/Container";
+import Container from "@/app/components/layout/Container";
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { useRouter } from "next/navigation";
-import Footer from "@/app/components/Footer";
-import Behind from "@/app/components/Behind";
+import Footer from "@/app/components/layout/Footer";
+import Behind from "@/app/components/layout/Behind";
 
 interface Appointment {
   id: number;
@@ -19,13 +19,7 @@ interface Appointment {
 
 
 export default function Panel() {
-    const router = useRouter()  
-    function clicando(acao: "agenda" | "clientes" | "painel") {
-  if (acao === "agenda")   router.push('/pages/calendar');
-  if (acao === "clientes") router.push('/pages/register');
-  if (acao === "painel") router.push('/pages/panel');
-}
-  
+
   
   const [today] = useState(new Date());
 
@@ -43,57 +37,58 @@ export default function Panel() {
     cancelled: "bg-red-100 text-red-700 border-red-200",
   };
   return (
-    <Behind classname={""}>
-      
-    <Container>
+    <Behind classname={""}>  
+    
+      <Container className={"h-full overflow-y-auto"}>
 
-    <div className=" max-w-screen-lg mx-auto min-h-screen flex flex-col">
-      {/* Header Compacto para Mobile */}
-      <div className="bg-primary/50 p-4  sticky top-0 z-10 shadow-sm rounded-lg">
-        <div className="flex justify-between items-center">
-          <div>
-            <h1 className="text-lg font-bold text-gray-900">Agenda de Hoje</h1>
-            <p className="text-xs text-gray-900 capitalize">
-              {format(today, "EEEE, dd 'de' MMMM", { locale: ptBR })}
-            </p>
+      <div className=" max-w-screen-lg mx-auto min-h-screen flex flex-col">
+        {/* Header Compacto para Mobile */}
+        <div className="bg-primary/50 p-4  sticky top-0 z-10 shadow-sm rounded-lg">
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-lg font-bold text-gray-900">Agenda de Hoje</h1>
+              <p className="text-xs text-gray-900 capitalize">
+                {format(today, "EEEE, dd 'de' MMMM", { locale: ptBR })}
+              </p>
+            </div>
+        
           </div>
-      
         </div>
-      </div>
 
-      {/* Timeline Mobile */}
-      <div className="p-4 space-y-3">
-        {appointments.map((apt) => (
-          <div key={apt.id} className="flex gap-4 group">
-            {/* Linha do tempo lateral */}
-            <div className="flex flex-col items-center">
-              <span className="text-sm font-bold text-gray-700 whitespace-nowrap">{apt.time}</span>
-              <div className="w-px h-full bg-gray-200 my-1 relative">
-                <div className={`absolute -left-1 top-0 w-2 h-2 rounded-full ${apt.status === 'confirmed' ? 'bg-green-500' : 'bg-yellow-500'}`} />
+        {/* Timeline Mobile */}
+        <div className="p-4 space-y-3">
+          {appointments.map((apt) => (
+            <div key={apt.id} className="flex gap-4 group">
+              {/* Linha do tempo lateral */}
+              <div className="flex flex-col items-center">
+                <span className="text-sm font-bold text-gray-700 whitespace-nowrap">{apt.time}</span>
+                <div className="w-px h-full bg-gray-200 my-1 relative">
+                  <div className={`absolute -left-1 top-0 w-2 h-2 rounded-full ${apt.status === 'confirmed' ? 'bg-green-500' : 'bg-yellow-500'}`} />
+                </div>
+              </div>
+
+              {/* Card do Agendamento */}
+              <div className="flex-1 bg-white rounded-xl p-4 shadow-sm border border-gray-100 active:bg-gray-50 transition-colors">
+                <div className="flex justify-between items-start mb-1">
+                  <h3 className="font-bold text-gray-900 text-base leading-tight">{apt.client}</h3>
+                  <span className="text-sm font-bold text-indigo-600">{apt.price}</span>
+                </div>
+                
+                <div className="flex justify-between items-center">
+                  <p className="text-xs text-gray-500">{apt.service}</p>
+                  <span className={`text-[10px] font-extrabold uppercase px-2 py-0.5 rounded border 
+                    ${apt.status === 'confirmed' ? 'border-green-200 text-green-600 bg-green-50' : 'border-yellow-200 text-yellow-600 bg-yellow-50'}`}>
+                    {apt.status === 'confirmed' ? 'Ok' : 'Pendente'}
+                  </span>
+                </div>
               </div>
             </div>
-
-            {/* Card do Agendamento */}
-            <div className="flex-1 bg-white rounded-xl p-4 shadow-sm border border-gray-100 active:bg-gray-50 transition-colors">
-              <div className="flex justify-between items-start mb-1">
-                <h3 className="font-bold text-gray-900 text-base leading-tight">{apt.client}</h3>
-                <span className="text-sm font-bold text-indigo-600">{apt.price}</span>
-              </div>
-              
-              <div className="flex justify-between items-center">
-                <p className="text-xs text-gray-500">{apt.service}</p>
-                <span className={`text-[10px] font-extrabold uppercase px-2 py-0.5 rounded border 
-                  ${apt.status === 'confirmed' ? 'border-green-200 text-green-600 bg-green-50' : 'border-yellow-200 text-yellow-600 bg-yellow-50'}`}>
-                  {apt.status === 'confirmed' ? 'Ok' : 'Pendente'}
-                </span>
-              </div>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
+          <Footer />
       </div>
-        <Footer onClick={clicando}/>
-    </div>
-    </Container>
+      </Container>
+     
     </Behind>
     
   );
